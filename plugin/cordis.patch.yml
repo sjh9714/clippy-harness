@@ -1,0 +1,6 @@
+# dsh-clippy bundle patch: inserts the clippy plugin row into the web
+# plugin roster. One row mounts both halves (host state service + browser
+# floating assistant).
+- insert:
+    - id: clippy
+      name: 'dsh-clippy'

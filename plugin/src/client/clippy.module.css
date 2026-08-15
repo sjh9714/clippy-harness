@@ -1,0 +1,259 @@
+.root {
+  position: fixed;
+  z-index: 2147482000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+.bubble {
+  max-width: 240px;
+  background: #fffbd6;
+  color: #1a1a1a;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 10px;
+  padding: 9px 12px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  right: 38px;
+  border: 10px solid transparent;
+  border-top-color: #1a1a1a;
+  border-bottom: none;
+}
+
+.bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  right: 40px;
+  z-index: 1;
+  border: 8px solid transparent;
+  border-top-color: #fffbd6;
+  border-bottom: none;
+}
+
+.clip {
+  width: 96px;
+  height: 120px;
+  cursor: grab;
+  filter: drop-shadow(2px 3px 0 rgba(0, 0, 0, 0.25));
+  animation: idle 3s ease-in-out infinite;
+}
+
+.clip:active {
+  cursor: grabbing;
+}
+
+.wire {
+  fill: none;
+  stroke: #8f9bb3;
+  stroke-width: 7;
+  stroke-linecap: round;
+}
+
+.wireHighlight {
+  fill: none;
+  stroke: #c9d2e4;
+  stroke-width: 2.4;
+  stroke-linecap: round;
+}
+
+.brow {
+  stroke: #333;
+  stroke-width: 3;
+  stroke-linecap: round;
+  fill: none;
+}
+
+.pupil {
+  transition: transform 0.3s;
+}
+
+@keyframes idle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+.thinking .clip {
+  animation: tilt 1.2s ease-in-out infinite;
+}
+
+.thinking .pupil {
+  transform: translate(-2px, -3px);
+}
+
+@keyframes tilt {
+  0%, 100% { transform: rotate(-4deg); }
+  50% { transform: rotate(5deg); }
+}
+
+.tool .clip {
+  animation: bop 0.45s ease-in-out infinite;
+}
+
+.tool .pupil {
+  transform: translateY(3px);
+}
+
+@keyframes bop {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  50% { transform: translateY(3px) scaleY(0.96); }
+}
+
+.done .clip {
+  animation: spinjump 0.9s ease-in-out infinite;
+}
+
+@keyframes spinjump {
+  0%, 100% { transform: translateY(0) rotate(0); }
+  30% { transform: translateY(-16px) rotate(-10deg); }
+  60% { transform: translateY(-10px) rotate(9deg); }
+}
+
+.failed .clip {
+  animation: shake 0.5s ease-in-out 2;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px) rotate(-3deg); }
+  75% { transform: translateX(5px) rotate(3deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .clip,
+  .thinking .clip,
+  .tool .clip,
+  .done .clip,
+  .failed .clip {
+    animation: none;
+  }
+}
+
+.hideButton {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 1px solid #888;
+  background: #eee;
+  color: #444;
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.root:hover .hideButton {
+  opacity: 1;
+}
+
+.summon {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 2147482000;
+  border: 1px solid #888;
+  border-radius: 14px;
+  background: #f4f4f4;
+  color: #333;
+  font-size: 12px;
+  padding: 4px 10px;
+  cursor: pointer;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Classic error dialog */
+.dialogOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2147482100;
+  display: grid;
+  place-items: center;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.dialog {
+  width: 380px;
+  max-width: calc(100vw - 40px);
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #ffffff #404040 #404040 #ffffff;
+  box-shadow: inset 1px 1px 0 #c0c0c0, inset -1px -1px 0 #808080, 3px 3px 0 rgba(0, 0, 0, 0.35);
+  font-family: Tahoma, 'MS Sans Serif', Geneva, Verdana, sans-serif;
+  font-size: 12px;
+  color: #000;
+}
+
+.dialogTitle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 3px 6px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+}
+
+.dialogBody {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 14px 8px;
+}
+
+.dialogIcon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+}
+
+.dialogText {
+  line-height: 1.5;
+}
+
+.dialogDetail {
+  margin-top: 6px;
+  color: #444;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+}
+
+.dialogButtons {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 14px 14px;
+}
+
+.dialogButton {
+  min-width: 84px;
+  padding: 4px 12px;
+  background: #c0c0c0;
+  border: 1px solid;
+  border-color: #ffffff #404040 #404040 #ffffff;
+  box-shadow: inset 1px 1px 0 #c0c0c0, inset -1px -1px 0 #808080;
+  font-family: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.dialogButton:focus-visible {
+  outline: 1px dotted #000;
+  outline-offset: -4px;
+}
