@@ -5,7 +5,7 @@
  * @module dsh-clippy/client/Clippy
  */
 
-import { useEffect, useRef, useState, type ReactElement } from 'react'
+import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent, type ReactElement } from 'react'
 import type { ClippySnapshot } from '../state.ts'
 import styles from './clippy.module.css'
 
@@ -46,11 +46,11 @@ export function Clippy({ snapshot }: ClippyProps): ReactElement {
     localStorage.setItem(HIDDEN_KEY, hidden ? '1' : '0')
   }, [hidden])
 
-  const onPointerDown = (event: PointerEvent): void => {
+  const onPointerDown = (event: ReactPointerEvent<SVGSVGElement>): void => {
     dragging.current = { startX: event.clientX, startY: event.clientY, base: position }
     ;(event.target as Element).setPointerCapture(event.pointerId)
   }
-  const onPointerMove = (event: PointerEvent): void => {
+  const onPointerMove = (event: ReactPointerEvent<SVGSVGElement>): void => {
     const drag = dragging.current
     if (drag === null) return
     setPosition({
