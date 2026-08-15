@@ -23,9 +23,18 @@ npx @deepseek-ai/dsh plugin --profile web add dsh-clippy
 
 Restart `dsh web` and he is in the corner.
 
-## What he does
+## He interrupts you again
 
-He subscribes to core session events, so every reaction is the agent's real state. Not a decoration.
+The classic. He reads your message on its way to the agent, and when it looks
+risky he has opinions. Say "deploy" and you get options. Each line fires once
+per session, then he lets it go.
+
+![interject](assets/state-interject.gif)
+
+## He follows real agent state
+
+He subscribes to core session events. Every reaction is the agent's actual
+state, not a decoration.
 
 | Thinking | Running a tool |
 | --- | --- |
@@ -36,10 +45,30 @@ He subscribes to core session events, so every reaction is the agent's real stat
 | ![done](assets/state-done.gif) | ![failed](assets/state-failed.gif) |
 
 - **Thinking** gets a head tilt. He reads your codebase now. All of it. Unlike 1997.
-- **Tool calls** get a busy bounce with the tool name in the bubble.
+- **Tool calls** get a busy bounce.
 - **A completed turn** gets a jump. He checked. Twice.
-- **A failed turn** opens the classic dialog. *"Your agent has performed an illegal operation."* The buttons are Close and It wasn't me.
-- Drag him anywhere. Hide him and a summon button appears. He is good at waiting. 25 years of practice.
+- **A failed turn** gets angry eyebrows and the classic dialog. *"Your agent has performed an illegal operation."* The buttons are Close and It wasn't me.
+
+## He has a personality now
+
+- Blinks, glances around, and wiggles while idle.
+- Click him for a reaction. Drag him anywhere.
+- Right click for the menu. Hide, sound toggle, About Clippy, and Fire him. Again.
+- Optional synthesized retro sounds (default off, no audio files shipped).
+
+## Custom lines
+
+Every line he says can be replaced through the plugin config.
+
+```yaml
+- id: clippy
+  name: 'dsh-clippy'
+  config:
+    state:
+      lines:
+        done:
+          - 'Ship it.'
+```
 
 ## Pairs well with
 
@@ -56,6 +85,10 @@ npx @deepseek-ai/dsh plugin --profile web add link:/path/to/clippy-harness/plugi
 Every AI assistant today is trying to look like the future.
 The first one of them all deserves to come back and see how it turned out.
 
+## Credits
+
+Character rig adapted from [ManzDev/twitch-clippy](https://github.com/ManzDev/twitch-clippy) (ISC). Demo scenes are rendered with the seek(t) harness in `demo/`.
+
 ## License
 
-MIT. Not affiliated with Microsoft. The paperclip is an original drawing. Clippit, we miss you.
+MIT. Not affiliated with Microsoft. Clippit, we miss you.

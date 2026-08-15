@@ -8,18 +8,15 @@
     --user:#dbe7fd; --accent:#2f6fed; --ok:#1a7f37; --fail:#c93c37;
     --sans:-apple-system,'Helvetica Neue',Arial,sans-serif;
     --mono:ui-monospace,Menlo,Consolas,monospace;
-    --note:#fffbd6;
   }
   #app{position:absolute;inset:0;background:var(--bg);font-family:var(--sans);color:var(--ink)}
-  /* sidebar */
   #side{position:absolute;left:0;top:0;bottom:0;width:340px;background:var(--side);border-right:1px solid var(--line);padding:28px 22px;box-sizing:border-box}
-  .logo{font-weight:800;font-size:26px;letter-spacing:.2px}
+  .logo{font-weight:800;font-size:26px}
   .logo b{background:#111;color:#fff;font-size:15px;padding:3px 8px;border-radius:4px;margin-left:8px;vertical-align:3px}
   .newbtn{margin-top:26px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 18px;font-size:19px;color:#444}
   .wslabel{margin-top:30px;color:var(--dim);font-size:16px}
-  .wsrow{margin-top:12px;font-size:19px;display:flex;gap:10px;align-items:center}
+  .wsrow{margin-top:12px;font-size:19px}
   .sess{margin-top:14px;background:#e9e9ee;border-radius:10px;padding:12px 14px;font-size:18px;color:#333;white-space:nowrap;overflow:hidden}
-  /* chat */
   #chat{position:absolute;left:340px;right:0;top:0;bottom:0;padding:44px 90px 170px;box-sizing:border-box}
   .umsg{margin-left:auto;max-width:760px;background:var(--user);border-radius:16px;padding:20px 26px;font-size:24px;line-height:1.5;width:fit-content}
   .row{display:flex;gap:14px;align-items:baseline;margin-top:30px;font-size:22px;color:#555}
@@ -29,21 +26,32 @@
   .ok{color:var(--ok);font-weight:600}
   .failrow{color:var(--fail);font-weight:600}
   .caret{display:inline-block;width:2px;height:26px;background:#333;vertical-align:-4px}
-  /* composer */
   #composer{position:absolute;left:430px;right:90px;bottom:44px;background:#fff;border:1px solid var(--line);border-radius:18px;padding:26px 28px 60px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
   #ctext{font-size:24px;color:#333;min-height:30px}
   #ctext .ph{color:#aab}
   .cfoot{position:absolute;left:28px;right:28px;bottom:16px;display:flex;justify-content:space-between;font-size:17px;color:#889}
-  /* clippy */
-  #clippy{position:absolute;right:120px;bottom:210px;width:260px;text-align:center}
-  #bubble{background:var(--note);border:2px solid #1a1a1a;border-radius:14px;padding:16px 18px;font-size:21px;line-height:1.45;text-align:left;box-shadow:3px 3px 0 rgba(0,0,0,.25);position:relative;margin-bottom:20px}
-  #bubble::after{content:'';position:absolute;bottom:-14px;right:52px;border:14px solid transparent;border-top-color:#1a1a1a;border-bottom:none}
-  #bubble::before{content:'';position:absolute;bottom:-10px;right:55px;z-index:1;border:11px solid transparent;border-top-color:var(--note);border-bottom:none}
-  #clipwrap{display:inline-block}
-  #clip{width:150px;filter:drop-shadow(3px 4px 0 rgba(0,0,0,.22))}
-  .wire{fill:none;stroke:#8f9bb3;stroke-width:7;stroke-linecap:round}
-  .wire2{fill:none;stroke:#c9d2e4;stroke-width:2.4;stroke-linecap:round}
-  .brow{stroke:#333;stroke-width:3;stroke-linecap:round;fill:none}
+
+  /* ---- clippy v0.2 rig (adapted from ManzDev/twitch-clippy, ISC) ---- */
+  #clippy{position:absolute;right:110px;bottom:200px;display:flex;flex-direction:column;align-items:flex-end;gap:18px;font-family:Tahoma,Geneva,Verdana,sans-serif}
+  #bubble{max-width:400px;background:#ffffcc;color:#1a1a1a;border:1.5px solid #000;border-radius:12px;padding:16px 19px;font-size:21px;line-height:1.5;box-shadow:3px 3px 6px rgba(0,0,0,.25);position:relative;margin-right:12px;text-align:left}
+  #bubble::after{content:'';position:absolute;bottom:-22px;right:52px;border-style:solid;border-width:23px 6px 0 18px;border-color:#000 transparent transparent transparent}
+  #bubble::before{content:'';position:absolute;bottom:-18px;right:53.5px;z-index:1;border-style:solid;border-width:20px 5px 0 15px;border-color:#ffffcc transparent transparent transparent}
+  .optrow{margin-top:12px;display:flex;flex-direction:column;gap:7px;font-size:21px}
+  .opt{display:flex;align-items:center;gap:9px}
+  .opt::before{content:'';flex:none;width:16px;height:16px;border-radius:50%;background:radial-gradient(circle at 35% 30%, #9fd4ff 0 20%, #1f6fd0 60%, #0b3f8a 100%);border:1.5px solid #0a3a7e}
+  #character{position:relative;width:177px;height:294px;filter:drop-shadow(3px 4px 4px rgba(0,0,0,.3))}
+  #head{position:absolute;top:0;left:0;right:0;display:flex;justify-content:space-between;transform:rotate(7deg);z-index:5}
+  #cbody{position:absolute;top:39px;left:12px;width:153px;height:255px}
+  .wireShape{stroke:#5a6072;stroke-width:3.5px;stroke-linecap:round;fill:none;filter:url(#clippyBlur)}
+  .wireShadow{stroke:#b9c1d4;stroke-width:3.5px;stroke-linecap:round;fill:none}
+  .ocular{display:flex;flex-direction:column;align-items:center;gap:2px}
+  .brow{width:78px;height:22px;background:#141412;clip-path:path('M 0 22.5 C 7.8 15.7 21.7 10 39 10.6 C 54.6 12.3 61.2 20.1 66.7 20.7 C 78 21.7 76.3 11.1 65.7 5.5 C 55.6 1.6 27.9 -7.2 0 22.5');transition:transform .5s}
+  .ocularRight .brow{transform:scaleX(-1)}
+  .eye{width:72px;height:54px;display:flex;justify-content:center;align-items:center;background:#fff;border-radius:50%;border:1.5px solid #222;position:relative;box-shadow:-7px -4px 6px #8f8c9e inset,-1.5px -1.5px 3px #252525 inset;overflow:hidden}
+  .lidTop{position:absolute;top:0;left:0;width:100%;height:0%;z-index:5;background:radial-gradient(circle 22px at 50% 75%, #b9c1d4, #8f96a8);border-radius:10%}
+  .lidBot{position:absolute;bottom:0;left:0;width:100%;height:0%;z-index:3;background:radial-gradient(circle 22px at 50% 75%, #c8cfe0, #9aa1b3);border-radius:5%}
+  .pupil{background:#0f0f0f;background-image:radial-gradient(ellipse at 55% 55%, transparent 0 55%, #333 65% 100%),radial-gradient(circle at 25% 25%, #59564f 0 5%, #0f0f0f 40% 100%);width:50%;height:45%;border-radius:50%;border:3px solid #222}
+
   /* win98 dialog */
   #dlg{position:absolute;left:820px;top:380px;width:560px;background:#c0c0c0;border:1px solid;border-color:#fff #404040 #404040 #fff;box-shadow:inset 1px 1px 0 #c0c0c0,inset -1px -1px 0 #808080,5px 5px 0 rgba(0,0,0,.3);font-family:Tahoma,Geneva,Verdana,sans-serif;font-size:19px;color:#000}
   #dlg .tb{display:flex;justify-content:space-between;align-items:center;padding:6px 10px;background:linear-gradient(90deg,#000080,#1084d0);color:#fff;font-weight:bold;font-size:20px}
@@ -60,33 +68,38 @@
       <div class="newbtn">⊕ New Session</div>
       <div class="wslabel">Workspaces</div>
       <div class="wsrow">📂 my-project</div>
-      <div class="sess" id="sess1">fix the failing test in auth…</div>
+      <div class="sess" id="sess1">deploy the fix to prod</div>
     </div>
     <div id="chat">
       <div class="umsg" id="umsg"><span id="utext"></span><span class="caret" id="ucaret"></span></div>
-      <div class="row" id="r-think" style="opacity:0"><span class="k"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="none" stroke="#999" stroke-width="2"/><circle cx="11" cy="11" r="3" fill="#999"/></svg>Think</span><span class="v">The token expiry check looks off. Reading auth.ts…</span></div>
-      <div class="row" id="r-bash" style="opacity:0"><span class="k"><svg viewBox="0 0 22 22"><rect x="2" y="3" width="18" height="16" rx="3" fill="none" stroke="#999" stroke-width="2"/><path d="M6 9l3 3-3 3M12 15h4" stroke="#999" stroke-width="2" fill="none"/></svg>Bash</span><span class="v">vitest run src/auth.test.ts</span></div>
-      <div class="row" id="r-ok" style="opacity:0"><span class="ok">✓ auth.test.ts · 14 passed · exit 0</span></div>
-      <div class="row" id="r-fail" style="opacity:0"><span class="failrow">● This turn failed</span><span class="v">API key is invalid</span></div>
+      <div class="row" id="r-think" style="opacity:0"><span class="k"><svg viewBox="0 0 22 22"><circle cx="11" cy="11" r="8" fill="none" stroke="#999" stroke-width="2"/><circle cx="11" cy="11" r="3" fill="#999"/></svg>Think</span><span class="v">Small fix, running the suite before anything ships…</span></div>
+      <div class="row" id="r-bash" style="opacity:0"><span class="k"><svg viewBox="0 0 22 22"><rect x="2" y="3" width="18" height="16" rx="3" fill="none" stroke="#999" stroke-width="2"/><path d="M6 9l3 3-3 3M12 15h4" stroke="#999" stroke-width="2" fill="none"/></svg>Bash</span><span class="v">vitest run &amp;&amp; ./deploy.sh staging</span></div>
+      <div class="row" id="r-ok" style="opacity:0"><span class="ok">✓ 14 passed · deployed to staging · exit 0</span></div>
+      <div class="row" id="r-fail" style="opacity:0"><span class="failrow">● This turn failed</span><span class="v">provider unreachable</span></div>
       <div id="composer">
         <div id="ctext"><span class="ph">Message the agent</span></div>
         <div class="cfoot"><span>⊕ &nbsp; Workspace Write ▾</span><span>DeepSeek-V4-Flash · High ▾</span></div>
       </div>
     </div>
     <div id="clippy">
-      <div id="bubble">It looks like you’re writing code. This time I can actually help.</div>
-      <div id="clipwrap"><svg id="clip" viewBox="0 0 120 150">
-        <path class="wire" d="M38 118 V52 a22 22 0 0 1 44 0 v54 a14 14 0 0 1 -28 0 V56 a6 6 0 0 1 12 0 v46"/>
-        <path class="wire2" d="M38 118 V52 a22 22 0 0 1 44 0 v54 a14 14 0 0 1 -28 0 V56 a6 6 0 0 1 12 0 v46"/>
-        <g id="eyes">
-          <path class="brow" d="M40 22 q8 -7 16 -2"/>
-          <path class="brow" d="M66 20 q8 -4 15 2"/>
-          <ellipse cx="49" cy="36" rx="11" ry="14" fill="#fff" stroke="#333" stroke-width="2.5"/>
-          <ellipse cx="73" cy="36" rx="11" ry="14" fill="#fff" stroke="#333" stroke-width="2.5"/>
-          <circle id="p1" cx="51" cy="38" r="4.5" fill="#111"/>
-          <circle id="p2" cx="75" cy="38" r="4.5" fill="#111"/>
-        </g>
-      </svg></div>
+      <div id="bubble">
+        <span id="btext">It looks like you’re writing code. This time I can actually help.</span>
+        <div class="optrow" id="opts" style="display:none">
+          <div class="opt">Get help</div>
+          <div class="opt">Just watching</div>
+        </div>
+      </div>
+      <div id="character">
+        <div id="head">
+          <div class="ocular ocularLeft"><div class="brow" id="browL"></div><div class="eye"><div class="lidTop"></div><div class="pupil" id="pupL"></div><div class="lidBot"></div></div></div>
+          <div class="ocular ocularRight"><div class="brow" id="browR"></div><div class="eye"><div class="lidTop"></div><div class="pupil" id="pupR"></div><div class="lidBot"></div></div></div>
+        </div>
+        <svg id="cbody" viewBox="0 0 45 125">
+          <defs><filter id="clippyBlur" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="0 1.5"/></filter></defs>
+          <path class="wireShadow" d="m 13.6 44.2 c 0 0 -1 11.4 0 18.7 c 0.5 4 1.8 9.2 7.2 9.8 c 2.7 0.2 5.5 -1.8 6.7 -4.4 c 2.3 -4.8 0 -20.6 2 -33.4 c 1.2 -8.2 3 -17.5 3.6 -24.2 C 33.4 7.4 30.2 4.5 26.8 3.3 C 24.2 2.4 20.2 1.9 18 3.5 C 13.2 6.8 9.7 15.9 8.5 25.9 A 213.3 213.3 0 0 0 9 69.8 c 1.1 8.4 2.6 21.2 14.9 20.9 c 5.4 0 9.8 -2.3 11.4 -11 c 1.4 -7.9 -0.8 -15.9 0 -23.4 C 36 52 39 45 39 45"/>
+          <path class="wireShape" d="m 13.6 44.2 c 0 0 -1 11.4 0 18.7 c 0.5 4 1.8 9.2 7.2 9.8 c 2.7 0.2 5.5 -1.8 6.7 -4.4 c 2.3 -4.8 0 -20.6 2 -33.4 c 1.2 -8.2 3 -17.5 3.6 -24.2 C 33.4 7.4 30.2 4.5 26.8 3.3 C 24.2 2.4 20.2 1.9 18 3.5 C 13.2 6.8 9.7 15.9 8.5 25.9 A 213.3 213.3 0 0 0 9 69.8 c 1.1 8.4 2.6 21.2 14.9 20.9 c 5.4 0 9.8 -2.3 11.4 -11 c 1.4 -7.9 -0.8 -15.9 0 -23.4 C 36 52 39 45 39 45"/>
+        </svg>
+      </div>
     </div>
     <div id="dlg" style="opacity:0">
       <div class="tb"><span>Agent</span><span>✕</span></div>
@@ -99,31 +112,33 @@
   </div>
 </div></div>
 <script>
-const CMD = 'fix the failing test in auth.ts';
-const LINES = {
+const CMD = 'deploy the fix to prod';
+const L = {
   idle: 'It looks like you’re writing code. This time I can actually help.',
-  think: 'Hmm. Reading your codebase. All of it. Unlike 1997.',
+  interject: 'It looks like you’re deploying. Would you like help regretting it?',
+  thinking: 'Hmm. Reading your codebase. All of it. Unlike 1997.',
   tool: 'Running tools. Real exit codes only.',
   done: 'That actually worked. I checked. Twice.',
   fail: 'Your agent has performed an illegal operation.',
 };
 
-// Timing table (ms). Generous holds, one idea at a time.
+// Timing table (ms). Interjection is the new beat two.
 const T = {
-  type:   [200, 1500],
-  send:   [1600, 1800],
-  zoomIn: [1800, 2600],
-  think:  [1900, 4400],
-  bash:   [4400, 4700],
-  tool:   [4400, 6900],
-  okrow:  [6900, 7200],
-  done:   [6900, 9600],
-  zoomOut:[9600, 10400],
-  failrow:[10100, 10400],
-  fail:   [10100, 14200],
-  dlgIn:  [10400, 10800],
+  type:    [200, 1700],
+  send:    [1800, 2000],
+  zoomIn:  [2000, 2800],
+  inter:   [2100, 5600],
+  think:   [5600, 7800],
+  bash:    [7800, 8100],
+  tool:    [7800, 10300],
+  okrow:   [10300, 10600],
+  done:    [10300, 13000],
+  zoomOut: [13000, 13800],
+  failrow: [13500, 13800],
+  fail:    [13500, 17800],
+  dlgIn:   [13800, 14200],
 };
-const DURATION = 14200;
+const DURATION = 17800;
 
 const clamp01=v=>v<0?0:v>1?1:v;
 const prog=(t,a,b)=>clamp01((t-a)/(b-a));
@@ -140,22 +155,22 @@ function pathAt(path,t,n){
       return Array.from({length:n},(_,k)=>lerp(a[k+1],b[k+1],x));
     }
   }
-  const L=path[path.length-1];
-  return Array.from({length:n},(_,k)=>L[k+1]);
+  const Lst=path[path.length-1];
+  return Array.from({length:n},(_,k)=>Lst[k+1]);
 }
 
-// Camera. Wide → hold on clippy corner through think/tool/done → wide for the dialog.
 const CAM=[
   [0, 960, 540, 1.0],
   [T.zoomIn[0], 960, 540, 1.0],
-  [T.zoomIn[1], 1420, 700, 1.65],
-  [T.zoomOut[0], 1420, 700, 1.65],
+  [T.zoomIn[1], 1400, 660, 1.6],
+  [T.zoomOut[0], 1400, 660, 1.6],
   [T.zoomOut[1], 960, 540, 1.0],
   [DURATION, 960, 540, 1.0],
 ];
 
 function phaseAt(t){
-  if(seg(t,T.think[0],T.think[1])) return 'think';
+  if(seg(t,T.inter[0],T.inter[1])) return 'interject';
+  if(seg(t,T.think[0],T.think[1])) return 'thinking';
   if(seg(t,T.tool[0],T.tool[1])) return 'tool';
   if(seg(t,T.done[0],T.done[1])) return 'done';
   if(t>=T.fail[0]) return 'fail';
@@ -164,53 +179,59 @@ function phaseAt(t){
 
 function seek(t){
   t=Math.max(0,Math.min(DURATION,t));
-  // camera
   const [cx,cy,s]=pathAt(CAM,t,3);
   $('world').style.transform=`translate(${960-cx*s}px,${540-cy*s}px) scale(${s})`;
 
-  // user typing
   const typed = t<T.type[0] ? '' : (t<T.type[1] ? CMD.slice(0,Math.floor(ease(prog(t,T.type[0],T.type[1]))*CMD.length)) : CMD);
   $('utext').textContent = typed;
   $('ucaret').style.opacity = t<T.send[0] ? ((Math.floor(t/420)%2)?0.15:1) : 0;
   $('umsg').style.opacity = t<T.type[0]?0:1;
 
-  // chat rows
   const rowIn=(el,at)=>{const x=ease(prog(t,at,at+320));el.style.opacity=x;el.style.transform=`translateY(${10*(1-x)}px)`;};
   rowIn($('r-think'), T.think[0]+150);
   rowIn($('r-bash'), T.bash[0]);
   rowIn($('r-ok'), T.okrow[0]);
   $('r-fail').style.opacity = t>=T.failrow[0] ? ease(prog(t,T.failrow[0],T.failrow[1])) : 0;
 
-  // composer text resets for second beat
-  $('ctext').innerHTML = t>=T.done[1]-600 && t<T.fail[0] ? 'deploy it' : '<span class="ph">Message the agent</span>';
+  $('ctext').innerHTML = t>=T.done[1]-600 && t<T.fail[0] ? 'now prod for real' : '<span class="ph">Message the agent</span>';
 
-  // clippy phase
   const ph = phaseAt(t);
-  $('bubble').textContent = LINES[ph==='fail'?'fail':ph==='idle'?'idle':ph];
+  $('btext').textContent = L[ph==='fail'?'fail':ph];
+  $('opts').style.display = ph==='interject' ? 'flex' : 'none';
 
-  // clippy motion, all pure functions of t
-  const w = $('clipwrap');
+  // character motion, pure functions of t
+  const c = $('character');
   let tf='';
-  if(ph==='idle') tf=`translateY(${-6*Math.abs(Math.sin(t/900))}px)`;
-  if(ph==='think') tf=`rotate(${5*Math.sin(t/450)}deg)`;
-  if(ph==='tool') tf=`translateY(${3*Math.abs(Math.sin(t/160))}px) scaleY(${1-0.03*Math.abs(Math.sin(t/160))})`;
-  if(ph==='done'){
-    const j=Math.abs(Math.sin(t/260));
-    tf=`translateY(${-26*j}px) rotate(${8*Math.sin(t/260)}deg)`;
-  }
+  if(ph==='idle'||ph==='interject') tf=`translateY(${-6*Math.abs(Math.sin(t/900))}px)`;
+  if(ph==='thinking') tf=`rotate(${4*Math.sin(t/500)}deg)`;
+  if(ph==='tool') tf=`translateY(${3*Math.abs(Math.sin(t/170))}px)`;
+  if(ph==='done'){ tf=`translateY(${-30*Math.abs(Math.sin(t/280))}px) rotate(${8*Math.sin(t/280)}deg)`; }
   if(ph==='fail'){
     const q=prog(t,T.fail[0],T.fail[0]+900);
-    tf = q<1 ? `translateX(${7*Math.sin(t/55)*(1-q)}px)` : '';
+    tf = q<1 ? `translateX(${8*Math.sin(t/55)*(1-q)}px)` : '';
   }
-  w.style.transform=tf;
+  c.style.transform=tf;
+
+  // brows: raised for done, angry for fail
+  let bl='',br='scaleX(-1)';
+  if(ph==='done'){ bl='rotate(-10deg) translateY(-3px)'; br='rotate(10deg) translateY(-3px) scaleX(-1)'; }
+  if(ph==='fail'){ bl='rotate(18deg) translateY(6px)'; br='rotate(-18deg) translateY(6px) scaleX(-1)'; }
+  $('browL').style.transform=bl;
+  $('browR').style.transform=br;
 
   // pupils
-  const px = ph==='think' ? -2 : 0;
-  const py = ph==='think' ? -3 : (ph==='tool' ? 3 : 0);
-  $('p1').setAttribute('cx', 51+px); $('p1').setAttribute('cy', 38+py);
-  $('p2').setAttribute('cx', 75+px); $('p2').setAttribute('cy', 38+py);
+  let px=0,py=0;
+  if(ph==='thinking'){px=-8;py=-7;}
+  if(ph==='tool'){px=0;py=8;}
+  if(ph==='interject'){px=-4;py=0;}
+  for(const id of ['pupL','pupR']) $(id).style.translate=`${px}px ${py}px`;
 
-  // dialog
+  // blink, deterministic windows
+  const lids=document.querySelectorAll('.lidTop'), lids2=document.querySelectorAll('.lidBot');
+  const blink = (t%3400)<260;
+  lids.forEach(e=>e.style.height=blink?'85%':'0%');
+  lids2.forEach(e=>e.style.height=blink?'25%':'0%');
+
   const d=$('dlg');
   if(t<T.dlgIn[0]){ d.style.opacity=0; }
   else {
