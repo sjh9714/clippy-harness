@@ -37,6 +37,7 @@ export class ClippyService extends Service {
           switch (event.type) {
             case 'turn/start':
             case 'step/start':
+            case 'assistant/chunk':
               this.machine.onInput({ phase: 'thinking' }, now)
               break
             case 'tool/call':

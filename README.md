@@ -7,20 +7,44 @@ An office assistant pet for the [DeepSeek Harness](https://github.com/deepseek-a
 He watched you write documents for 25 years and could do nothing.
 Now he has an agent runtime.
 
-![demo](assets/demo.gif)
+![demo](assets/launch.gif)
 
-## What it is
+## What he does
 
-- **An assistant that reacts to real agent state.** Idle, thinking, running tools, done, error. He bounces when your tests actually pass. He checked. Twice.
-- **Classic dialogs.** When a session crashes he tells you *"Your agent has performed an illegal operation."*
-- **Composes with skins.** Pair it with the `xp` skin from dsh-skins for the full retro desktop, like the GIF above. Works on the default theme too.
-- One npm install.
+- **Reacts to real agent state**, straight from core session events. Thinking, running tools (with the tool name), done, failed.
+- **Celebrates when the turn actually completes.** He checked. Twice.
+- **Opens a classic dialog when a turn fails.** *"Your agent has performed an illegal operation."* Buttons are Close and It wasn't me.
+- Drag him anywhere. Hide him and a summon button appears. He is good at waiting. 25 years of practice.
 
-## Status
+![failed dialog](assets/failed-dialog.png)
 
-**Concept stage, building this week.** The GIF above is a working mockup. [Open it in your browser](demo/mockup.html).
+## Install
 
-Star the repo to follow along, or tell me what the error dialog should say in the issues.
+```sh
+npx @deepseek-ai/dsh plugin --profile web add dsh-clippy
+```
+
+Then restart `dsh web` and he is in the corner.
+
+From a checkout
+
+```sh
+npx @deepseek-ai/dsh plugin --profile web add link:/path/to/clippy-harness/plugin
+```
+
+## States
+
+| Agent state | Clippy | Line |
+| --- | --- | --- |
+| idle | gentle bob | "It looks like you're writing code. This time I can actually help." |
+| thinking | head tilt | "Hmm. Reading your codebase. All of it. Unlike 1997." |
+| running a tool | busy bounce | "Running tools. Real exit codes only." |
+| done | jump | "That actually worked. I checked. Twice." |
+| failed | shake + dialog | "Your agent has performed an illegal operation." |
+
+## Pairs well with
+
+The `xp` skin from [dsh-skins](https://github.com/zhu1090093659/dsh-web-ui) turns the whole Web UI into a retro desktop. Clippy fits right in. He works on the default theme too.
 
 ## Why
 
@@ -36,11 +60,16 @@ The first one of them all deserves to come back and see how it turned out.
 
 为 DeepSeek Harness Web UI 打造的办公助手宠物。
 
-- 助手对真实智能体状态做出反应，包括思考、执行工具、完成、报错
-- 会话崩溃时弹出经典对话框 *"Your agent has performed an illegal operation."*
-- 搭配 dsh-skins 的 xp 皮肤即是完整复古桌面
+- 直接订阅核心会话事件，对真实智能体状态做出反应，包括思考、执行工具（显示工具名）、完成、报错
+- 任务真正完成时跳起来庆祝
+- 回合失败时弹出经典对话框 *"Your agent has performed an illegal operation."*
+- 可拖动、可隐藏，搭配 dsh-skins 的 xp 皮肤即是完整复古桌面
 
-目前为概念阶段，本周开工。欢迎 Star 关注进展。
+安装
+
+```sh
+npx @deepseek-ai/dsh plugin --profile web add dsh-clippy
+```
 
 </details>
 

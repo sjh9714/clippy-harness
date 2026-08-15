@@ -32,9 +32,11 @@ export interface ClippySnapshot {
 export interface ClippyStateConfig {
   /** Celebration window after done before settling to idle, ms. */
   celebrateMs: number
+  /** Minimum time the tool pose stays visible before thinking may replace it, ms. */
+  toolHoldMs: number
 }
 
-export const defaultClippyStateConfig: ClippyStateConfig = { celebrateMs: 4000 }
+export const defaultClippyStateConfig: ClippyStateConfig = { celebrateMs: 4000, toolHoldMs: 1500 }
 
 /** The assistant's lines, one voice, no filler. */
 export const LINES: Record<ClippyPhase, readonly string[]> = {
@@ -77,10 +79,17 @@ export class ClippyStateMachine {
   private seed = 0
   private sessionActive = false
 
-  constructor(private config: ClippyStateConfig = defaultClippyStateConfig) {}
+  private config: ClippyStateConfig
+
+  constructor(config: Partial<ClippyStateConfig> = {}) {
+    this.config = { ...defaultClippyStateConfig, ...config }
+  }
 
   onInput(input: ClippyInput, nowMs: number): void {
     if (input.phase === this.phase && input.detail === this.detail) return
+    // Tool calls are often much shorter than one client poll. Hold the tool
+    // pose briefly so the browser actually gets to show it.
+    if (this.phase === 'tool' && input.phase === 'thinking' && nowMs - this.phaseStartedAt < this.config.toolHoldMs) return
     this.phase = input.phase
     this.detail = input.detail
     this.phaseStartedAt = nowMs
