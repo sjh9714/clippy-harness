@@ -191,22 +191,17 @@ export function Clippy({ snapshot }: ClippyProps): ReactElement {
         >
           <div className={styles.head}>
             <div className={`${styles.ocular} ${styles.ocularLeft}`}>
-              <div className={styles.brow} />
+              <div className={styles.brow}><svg viewBox="0 0 56 14"><path d="M4 12 Q 18 1 40 5 Q 48 6.5 52 10" fill="none" stroke="#2c2c2a" strokeWidth="4.5" strokeLinecap="round" /></svg></div>
               <div className={styles.eye}><div className={styles.pupil} /></div>
             </div>
             <div className={`${styles.ocular} ${styles.ocularRight}`}>
-              <div className={styles.brow} />
+              <div className={styles.brow}><svg viewBox="0 0 56 14"><path d="M4 12 Q 18 1 40 5 Q 48 6.5 52 10" fill="none" stroke="#2c2c2a" strokeWidth="4.5" strokeLinecap="round" /></svg></div>
               <div className={styles.eye}><div className={styles.pupil} /></div>
             </div>
           </div>
           <svg className={styles.body} viewBox="0 0 45 125">
-            <defs>
-              <filter id="clippyBlur" colorInterpolationFilters="sRGB">
-                <feGaussianBlur stdDeviation="0 1.5" />
-              </filter>
-            </defs>
-            <path className={styles.wireShadow} d={WIRE_D} />
             <path className={styles.wireShape} d={WIRE_D} />
+            <path className={styles.wireShadow} d={WIRE_D} />
           </svg>
         </div>
       </div>
